@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Onboarding
 {
@@ -15,6 +14,7 @@ namespace Onboarding
 
         protected override void OnStart()
         {
+            VersionTracking.Track();
         }
 
         protected override void OnSleep()

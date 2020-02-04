@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using Onboarding.Feature;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Onboarding
@@ -16,6 +13,11 @@ namespace Onboarding
         public MainPage()
         {
             InitializeComponent();
+
+            if (VersionTracking.IsFirstLaunchEver)
+            {
+                Navigation.PushModalAsync(new OnboardingPage());
+            }
         }
     }
 }

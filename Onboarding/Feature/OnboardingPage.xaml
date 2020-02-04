@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             x:Class="Onboarding.Feature.OnboardingPage"
+             xmlns:ob="clr-namespace:Onboarding.Feature"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="#FFFFFF">
+    <ContentPage.BindingContext>
+        <ob:OnboardingViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BlueColor">#071D92</Color>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>           
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>              
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" /> 
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0"
+                    HorizontalOptions="EndAndExpand"
+                    Margin="0,0,20,0"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    BackgroundColor="Transparent"
+                    TextColor="{StaticResource BlueColor}"
+                    Text="{Binding SkipButtonText,}"
+                    Command="{Binding SkipCommand}"/>
+            <CarouselView x:Name="onBoardingCarousel"
+                          Grid.Row="1"
+                          ItemsSource="{Binding Items}"                          
+                          VerticalOptions="Center"
+                          Position="{Binding Position}">
+                 <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="ob:OnboardingModel">
+                        <ContentView>
+                        <FlexLayout Direction="Column"
+                                    JustifyContent="SpaceEvenly">
+                                <Label Text="{Binding Title}"
+                                       FontAttributes="Bold"
+                                       FontSize="Title" />
+                                <ffimageloadingsvg:SvgCachedImage                                  
+                                       Source="{Binding ImageUrl}"
+                                       Aspect="AspectFill"
+                                       WidthRequest="300" 
+                                       FlexLayout.AlignSelf="Center"/>                                
+                                <Label Text="{Binding Content}"
+                                       FontSize="Body"/>                     
+                            </FlexLayout>
+                            </ContentView>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                    Grid.Row="2"
+                    IndicatorView.ItemsSourceBy="onBoardingCarousel"
+                    IndicatorsShape="Circle"
+                    IndicatorColor="{StaticResource BlueColor}"
+                    SelectedIndicatorColor="DarkGray"
+                    HorizontalOptions="Center"/>                   
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
