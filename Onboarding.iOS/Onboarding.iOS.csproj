@@ -132,4 +132,9 @@
       <Name>Onboarding</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\healthy_habits.svg" />
+    <BundleResource Include="Resources\time.svg" />
+    <BundleResource Include="Resources\visual_data.svg" />
+  </ItemGroup>
 </Project>
